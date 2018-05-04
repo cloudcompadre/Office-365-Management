@@ -1,0 +1,3 @@
+install-script Get-WindowsAutoPilotInfo
+
+get-windowsautopulotinfo -ComputerName * -OutputFile "C:\*.csv"
