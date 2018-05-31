@@ -4,6 +4,7 @@ DO {
 write-host -ForegroundColor Yellow "----------------------------------------------"
 write-host -ForegroundColor Yellow "1 = Check + Download Runtimes and Modules"
 write-host -ForegroundColor Yellow "2 = Activate Modern Authentication"
+write-host -ForegroundColor Yellow "3 = Apply Admin Permission on all OneDrives in a tenant"
 write-host -ForegroundColor Yellow "----------------------------------------------"
 $mode = read-host "Select an option from 1-3"
 
@@ -123,6 +124,23 @@ $mode = 0
     Get-PSSession | Remove-PSSession
 
     $mode = 0
+}
+
+## Apply administrator permission on all OneDrives in a 365 Tenant.
+3 {
+
+$admin = read-host "Insert full loginname for the user to apply as administrator of all OneDrives (ex. admin@company.com)"
+$admsite = read-host "Insert URL to admin site (ex. https://company-admin.sharepoint.com)
+$perssite = read-host "Insert URL to main personal site (ex. https://company-my.sharepoint.com)"
+
+connect-sposervice -url $admsite
+
+$drives = get-sposite -IncludePersonalSite $true -filter {url -like $perssite}
+
+foreach($drive in $drives) {
+	set-spouser -site $drive.url -loginname $admin -issitecollectionadmin $true
+	write-host -foregroundcolor green "Adding permission to $drive.url"
+                           }
 }
 
 
