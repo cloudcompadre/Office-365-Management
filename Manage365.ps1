@@ -5,6 +5,7 @@ write-host -ForegroundColor Yellow "--------------------------------------------
 write-host -ForegroundColor Yellow "1 = Check + Download Runtimes and Modules"
 write-host -ForegroundColor Yellow "2 = Activate Modern Authentication"
 write-host -ForegroundColor Yellow "3 = Apply Admin Permission on all OneDrives in a tenant"
+write-host -ForegroundColor Yellow "4 = Activate password to never expire for a specific user"
 write-host -ForegroundColor Yellow "----------------------------------------------"
 $mode = read-host "Select an option from 1-3"
 
@@ -129,7 +130,7 @@ $mode = 0
 ## Apply administrator permission on all OneDrives in a 365 Tenant.
 3 {
 
-$admin = read-host "Insert full loginname for the user to apply as administrator of all OneDrives (ex. admin@company.com)"
+$admin = read-host "Insert full login name for the user to apply as administrator of all OneDrives (ex. admin@company.com)"
 $admsite = read-host "Insert URL to admin site (ex. https://company-admin.sharepoint.com)
 $perssite = read-host "Insert URL to main personal site (ex. https://company-my.sharepoint.com)"
 
@@ -143,6 +144,11 @@ foreach($drive in $drives) {
                            }
 }
 
+## Apply password never expire for user.
+4 {
+$pwuser = read-host "Insert full login name for the user you want the password to never expire"
+get-msoluser -UserPrincipalName $pwuser | Set-MsolUser -PasswordNeverExpires $true
+}
 
 default {write-host "Select an option!"}
 
