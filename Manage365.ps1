@@ -7,7 +7,7 @@ write-host -ForegroundColor Yellow "2 = Activate Modern Authentication"
 write-host -ForegroundColor Yellow "3 = Apply Admin Permission on all OneDrives in a tenant"
 write-host -ForegroundColor Yellow "4 = Activate password to never expire for a specific user"
 write-host -ForegroundColor Yellow "----------------------------------------------"
-$mode = read-host "Select an option from 1-3"
+$mode = read-host "Select an option from 1-4"
 
 
 
