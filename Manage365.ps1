@@ -119,7 +119,7 @@ $mode = 0
     $EXOSession = New-ExoPSSession
     Import-PSSession -Session $EXOSession -AllowClobber 
     Write-Host -ForegroundColor yellow "Activating Modern Authentication for Exchange Online"
-    Set-OrganizationConfig -O2Auth2ClientProfileEnabled $true
+    Set-OrganizationConfig -OAuth2ClientProfileEnabled $true
    
 
     Get-PSSession | Remove-PSSession
